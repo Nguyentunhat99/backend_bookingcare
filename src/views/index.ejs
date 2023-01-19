@@ -40,13 +40,37 @@
                 <td><%= dataUser[i].lastName %></td>
                 <td>
                     <a href="detail/user/<%= dataUser[i].id %>">Detail</a>
-                    <a href="edit/user/<%= dataUser[i].id %>">Edit</a>
-                    <a href="delete/user/<%= dataUser[i].id %>">Delete</a>
+                    <a href="edituser/<%= dataUser[i].id %>">Edit</a>
+                    <a href="deleteUser/<%= dataUser[i].id %>">Delete</a>
                 </td>
             </tr>
         <% } %>
     </tbody>
   </table>
+  <div>
+    <div><b>Create a new user:</b></div>
+    <form action="/createNewUser" method="POST">
+        <div>
+            <label for="">First name:</label>
+            <input type="text" name="firstName">
+        </div>
+        <div>
+            <label for="">Last name:</label>
+            <input type="text" name="lastName">
+        </div>
+        <div>
+            <label for="">Email:</label>
+            <input type="email" name="email">
+        </div>
+        <div>
+            <label for="">Address:</label>
+            <input type="text" name="address">
+        </div>
+        <div>
+            <button type="submit" class="btn-submit">Submit</button>
+        </div>
+    </form>
+  </div>
 </body>
 
 </html>

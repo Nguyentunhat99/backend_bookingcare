@@ -39,3 +39,7 @@ body {
   }
   
   tr:hover {background-color: coral;}
+
+  .btn-submit{
+    cursor: pointer;
+  }
