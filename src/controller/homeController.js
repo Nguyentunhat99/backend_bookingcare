@@ -44,11 +44,6 @@ let editUser = async (req, res) => {
 
 let updateUser = async (req, res) => {
     let {  firstName, lastName, email, address, id } = req.body;
-    console.log(req.body);
-    console.log(id);
-    console.log(firstName);
-    console.log(lastName);
-    console.log(email);
     console.log(address);
     await connection.execute('update users set firstName= ?, lastName = ? , email = ? , address= ? where id = ?',
     [firstName, lastName, email, address, id]);
