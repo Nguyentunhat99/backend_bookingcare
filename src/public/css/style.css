@@ -43,3 +43,16 @@ body {
   .btn-submit{
     cursor: pointer;
   }
+.upload-file-container {
+  padding: 15px;
+}
+
+.upload-file-container {
+  display: block;
+}
+
+
+.btn-save{
+  margin-top: 15px;
+  cursor: pointer;
+}
