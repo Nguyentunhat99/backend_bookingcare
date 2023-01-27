@@ -56,3 +56,7 @@ body {
   margin-top: 15px;
   cursor: pointer;
 }
+
+hr {
+  border-top: 3px solid #eee !important;
+}
