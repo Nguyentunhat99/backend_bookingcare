@@ -57,8 +57,6 @@ let getuploadFilePage = async (req, res) => {
     return res.render('uploadFile.ejs')
 }
 
-// const upload = multer().single('profile_pic');
-
 
 let handleUploadFile = async (req, res) => {
     if (req.fileValidationError) {
@@ -70,7 +68,7 @@ let handleUploadFile = async (req, res) => {
     }
 
     // Display uploaded image for user validation
-    res.send(`You have uploaded this image: <hr/><img src="/image/${req.file.filename}" width="500"><hr /><a href="/upload">Upload another image</a>`);
+    res.send(`You have uploaded this image: <hr/><img src="/image/${req.file.filename}" width="500"><hr /><a href="/upload-file">Upload another image</a>`);
     // });
 }
 
@@ -90,7 +88,7 @@ let handleUploadMultipleFiles = async (req, res) => {
     for (index = 0, len = files.length; index < len; ++index) {
         result += `<img src="/image/${files[index].filename}" width="300" style="margin-right: 20px;">`;
     }
-    result += '<hr/><a href="/upload">Upload more images</a>';
+    result += '<hr/><a href="/upload-file">Upload more images</a>';
     res.send(result);
 }
 
