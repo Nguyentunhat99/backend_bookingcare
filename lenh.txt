@@ -1,0 +1,3 @@
+npx sequelize-cli init
+https://sequelize.org/docs/v6/other-topics/migrations/#installing-the-cli
+

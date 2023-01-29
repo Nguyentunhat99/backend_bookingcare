@@ -1,4 +1,4 @@
-import connection from '../configs/connectDB';
+import connection from '../config/connectDB';
 
 
 let getAllUsers = async (req,res) => {
