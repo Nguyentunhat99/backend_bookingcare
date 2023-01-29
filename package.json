@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Nguyentunhat99/fullstack_bookingcare.git"
+    "url": "git+https://github.com/Nguyentunhat99/NodeJS.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Nguyentunhat99/fullstack_bookingcare/issues"
+    "url": "https://github.com/Nguyentunhat99/NodeJS/issues"
   },
-  "homepage": "https://github.com/Nguyentunhat99/fullstack_bookingcare#readme",
+  "homepage": "https://github.com/Nguyentunhat99/NodeJS#readme",
   "dependencies": {
     "app-root-path": "3.0.0",
     "body-parser": "1.19.0",
