@@ -8,11 +8,11 @@ let router = express.Router();
 
 const initWebRoute = (app) => {
     router.get('/',homeController.getHomepage);
-
-
-    router.get('/about', (req, res) => {
-        res.send(`I'm Eric!`)
-    })
+    router.post('/postCRUD',homeController.postCRUD);  
+    router.get('/getCRUD',homeController.getCRUD);  
+    router.get('/editCRUD',homeController.editCRUD);   
+    router.post('/updateCRUD',homeController.updateCRUD);
+    router.get('/deleteCRUD',homeController.deleteCRUD);   
     return app.use('/', router)
 }
 export default initWebRoute;

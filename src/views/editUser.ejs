@@ -22,67 +22,46 @@
 <body>
     <div class="topnav">
         <a class="active" href="#home">Home</a>
-        <a href="/upload-file">Upload file</a>
+        <!-- <a href="/upload-file">Upload file</a> -->
     </div>
 
     
     <div style="padding-left:16px">
-        <h2>List user</h2>
+        <h2>Edit user</h2>
     </div>    
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% for( let i=0; i < data.length; i++ ) { %>
-                <tr>
-                    <td><%= data[i].id %></td>
-                    <td><%= data[i].firstName %></td>
-                    <td><%= data[i].lastName %></td>
-                    <td>
-                        <!-- <a href="detail/user?<%= data[i].id %>" target="_blank">Detail</a> -->
-                        <a href="editCRUD?id=<%= data[i].id %>" target="_blank">Edit</a>
-                        <a href="deleteCRUD?id=<%= data[i].id %>">Delete</a>
-                    </td>
-                </tr>
-            <% } %>
-        </tbody>
-    </table> 
     <div class="container">
         <div class="form-row">
-            <div class="col-12"><b>Create a new user:</b></div>
-            <form action="/postCRUD" method="POST">
+            <div class="col-12"><b>Edit user:</b></div>
+            <form action="/updateCRUD" method="POST">
                 <div class="form-row">
                     <div class="form-group col-md-6">
+                        <input class="form-control" value="<%= data.id %>" type="text" name="id" hidden>
+                    </div>
+                    <div class="form-group col-md-6">
                         <label for="">First name:</label>
-                        <input class="form-control" type="text" name="firstName">
+                        <input class="form-control" value="<%= data.firstName %>" type="text" name="firstName">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="">Last name:</label>
-                        <input class="form-control" type="text" name="lastName">
+                        <input class="form-control" value="<%= data.lastName %>" type="text" name="lastName">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="">Email:</label>
-                        <input class="form-control" type="email" name="email">
+                        <input class="form-control" value="<%= data.email %>" type="email" name="email">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="">Password:</label>
-                        <input class="form-control" type="password" name="password">
+                        <input class="form-control" value="<%= data.password %>" type="password" name="password">
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label for="">Phone number:</label>
-                        <input class="form-control" type="number" name="phonenumber">
+                        <input class="form-control" value="<%= data.phonenumber %>" type="number" name="phonenumber">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="">Address:</label>
-                        <input class="form-control" type="text" name="address">
+                        <input class="form-control" value="<%= data.address %>" type="text" name="address">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="">Gender:</label>
@@ -99,7 +78,7 @@
                             <option value="3">Patient</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-12"><button type="submit" class="btn btn-primary">Submit</button></div>
+                    <div class="form-group col-md-12"><button type="submit" class="btn btn-primary">Update</button></div>
                 </div>
             </form>
         </div>
