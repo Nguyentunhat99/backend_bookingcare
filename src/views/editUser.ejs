@@ -34,9 +34,7 @@
             <div class="col-12"><b>Edit user:</b></div>
             <form action="/updateCRUD" method="POST">
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <input class="form-control" value="<%= data.id %>" type="text" name="id" hidden>
-                    </div>
+                    <input class="form-control" value="<%= data.id %>" type="text" name="id" hidden>
                     <div class="form-group col-md-6">
                         <label for="">First name:</label>
                         <input class="form-control" value="<%= data.firstName %>" type="text" name="firstName">
