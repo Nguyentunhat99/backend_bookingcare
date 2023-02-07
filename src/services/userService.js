@@ -80,27 +80,28 @@ let createNewUser = (data) => {
         try {
             //check mail
             let check = await checkUserEmail(data.email);
-            if (check) {
+            if (check  === true) {
                 resolve({
                     errCode: 1,
                     errMessage: 'Your email is already is used, Plz try another email!'
                })
+            } else {
+                let hashPasswordFromBcrypt = await hashUserPassword(data.password);
+                await db.User.create({
+                    email: data.email, 
+                    password: hashPasswordFromBcrypt,
+                    firstName: data.firstName, 
+                    lastName: data.lastName, 
+                    address: data.address, 
+                    phonenumber: data.phonenumber,  
+                    gender: data.gender === '1' ? true : false, 
+                    roleid: data.roleid, 
+                })
+                resolve({
+                    errCode: 0,
+                    errMessage: 'Added user successfully!'
+                }); 
             }
-            let hashPasswordFromBcrypt = await hashUserPassword(data.password);
-            await db.User.create({
-                email: data.email, 
-                password: hashPasswordFromBcrypt,
-                firstName: data.firstName, 
-                lastName: data.lastName, 
-                address: data.address, 
-                phonenumber: data.phonenumber,  
-                gender: data.gender === '1' ? true : false, 
-                roleid: data.roleid, 
-            })
-            resolve({
-                errCode: 0,
-                errMessage: 'Added user successfully!'
-            }); 
         } catch (error) {
             reject(error)
         }
@@ -152,10 +153,11 @@ let updateUser = (data) => {
                 raw: false,
             })
             if (user) {
+                user.id = data.id;
                 user.firstName = data.firstName;
                 user.lastName = data.lastName;
                 user.address = data.address;
-                user.email = data.email;
+                user.phonenumber = data.phonenumber;
 
                 await user.save();
                 resolve({

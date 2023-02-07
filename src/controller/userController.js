@@ -47,7 +47,7 @@ let handlegetAllUsers = async (req, res) => {
     })
 }
 
-let handleeditUser = async (req, res) => {
+let handleupdateUser = async (req, res) => {
     let data = req.body;
     let message = await userService.updateUser(data);
     return res.status(200).json(message);
@@ -68,6 +68,6 @@ module.exports = {
     handleLogin,
     handleCreateNewUser,
     handlegetAllUsers,
-    handleeditUser,
+    handleupdateUser,
     handleDeleteUser,
 } 
