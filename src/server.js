@@ -29,7 +29,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8080;
 // -----------------------------------
 //-------------------------------------
 app.use(morgan('combined'))

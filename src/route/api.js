@@ -8,6 +8,7 @@ const initAPIRoute = (app) => {
     router.get('/getAllUsers', userController.handlegetAllUsers);
     router.put('/updateUser',userController.handleupdateUser);
     router.delete('/deleteUser',userController.handleDeleteUser);
+    router.get('/allCode',userController.getAllCode);
     
     return app.use('/api/v1/', router)
 }
