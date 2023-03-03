@@ -1,4 +1,4 @@
-import db from '../models/index';
+import db, { sequelize } from '../models/index';
 import bcrypt from 'bcryptjs';
 
 const salt = bcrypt.genSaltSync(10);
@@ -10,7 +10,7 @@ let handleUserLogin = (email, password) => {
             let isExist = await checkUserEmail(email);
             if (isExist) {
                 let user = await db.User.findOne({
-                    attributes: ['email','roleid','password'],
+                    attributes: ['email','roleid','password','firstName','lastName'],
                     where: {
                         email: email,
                     },
@@ -76,6 +76,7 @@ let hashUserPassword = (password) => {
 }
 
 let createNewUser = (data) => {
+    console.log('data:',data);
     return new Promise(async(resolve, reject) => {
         try {
             //check mail
@@ -94,8 +95,10 @@ let createNewUser = (data) => {
                     lastName: data.lastName, 
                     address: data.address, 
                     phonenumber: data.phonenumber,  
-                    gender: data.gender === '1' ? true : false, 
-                    roleid: data.roleid, 
+                    gender: data.gender, 
+                    roleid: data.roleId,
+                    positionid: data.positionId,
+                    image: data.avatar,
                 })
                 resolve({
                     errCode: 0,
@@ -140,7 +143,7 @@ let getAllUsers = (userId) => {
 let updateUser = (data) => {
     return new Promise(async(resolve, reject) => {
         try {
-            if(!data.id){
+            if(!data.id || !data.roleId || !data.positionId || !data.gender){
                 resolve({
                     errCode: 2,
                     errMessage: 'Missing requierd parameters id'
@@ -158,6 +161,12 @@ let updateUser = (data) => {
                 user.lastName = data.lastName;
                 user.address = data.address;
                 user.phonenumber = data.phonenumber;
+                user.roleid = data.roleId;
+                user.positionid = data.positionId;
+                user.gender = data.gender;
+                if(data.avatar){
+                    user.image = data.avatar;
+                }
 
                 await user.save();
                 resolve({

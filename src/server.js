@@ -4,6 +4,7 @@ import initWebRoute from './route/web';
 import initAPIRoute from './route/api';
 import connectDB from './config/connectDB';
 import cors from 'cors';
+import bodyParser from 'body-parser';
 
 require('dotenv').config()
 var morgan = require('morgan')//check log
@@ -29,12 +30,14 @@ app.use(function (req, res, next) {
     next();
 });
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8000;
 // -----------------------------------
 //-------------------------------------
 app.use(morgan('combined'))
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.json({limit: "50mb"}));
+app.use(express.urlencoded({limit: "50mb", extended: true}));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
 //setup view engine
 configViewEngine(app);
 
@@ -48,7 +51,7 @@ connectDB();
 //-------------------------------------
 
 //handle 404 notfound//chay sau router 
-app.use((req,res) => {
+app.use((req,res) => {  
     return res.render('404.ejs')
 })
 
