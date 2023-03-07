@@ -10,8 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      //define association here
+      //The A.hasOne(B) association means that a One-To-One relationship exists between A and B, with the foreign key being defined in the target model (B).
+      //The A.belongsTo(B) association means that a One-To-One relationship exists between A and B, with the foreign key being defined in the source model (A).
+      //The A.hasMany(B) association means that a One-To-Many relationship exists between A and B, with the foreign key being defined in the target model (B).
       Allcode.hasMany(models.User, { foreignKey: 'positionid', as: 'positionData'})
+      //1 ma code co trong nhieu user
       Allcode.hasMany(models.User, { foreignKey: 'gender', as: 'genderData'})
     }
   };

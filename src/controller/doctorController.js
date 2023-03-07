@@ -5,9 +5,9 @@ let getTopDoctorHome = async (req, res) => {
     try {
         if(!limit){
             limit = 10;
-            let dataDoctors = await doctorService.getTopDoctorHome(+limit);
-            return res.status(200).json(dataDoctors);
         }         
+        let dataDoctors = await doctorService.getTopDoctorHome(+limit);
+        return res.status(200).json(dataDoctors);
     } catch (error) {
         console.log(error);
         return res.status(200).json({ 
@@ -20,9 +20,8 @@ let getTopDoctorHome = async (req, res) => {
 let getAllDoctor = async (req, res) => {
     try {
         let dataAllDoctors = await doctorService.handlegetAllDoctor();
-        console.log('dataAll', dataAllDoctors);
+        // console.log('dataAll', dataAllDoctors);
         return res.status(200).json(dataAllDoctors);
-        
     } catch (error) {
         console.log(error);
         return res.status(200).json({ 
@@ -53,7 +52,7 @@ let getDetailInforDoctorById  = async (req, res) => {
             return res.status(200).json({
                 errCode: 1,
                 errMessage: 'Missing required parameters',
-                users: []
+                data: []
             })
         }else{
             let dataInfor = await doctorService.getDetailInforDoctorByIdService(req.query.id);
@@ -69,10 +68,26 @@ let getDetailInforDoctorById  = async (req, res) => {
     }
 }
 
+let editMarkdown  = async (req, res) => {
+    try {
+        let data = req.body;
+        // console.log('data controller',data);
+        let message = await doctorService.handleEditMarkdown(data);
+        return res.status(200).json(message);
+    } catch (error) {
+        console.log(error);
+        return res.status(200).json({ 
+            errCode: -1,
+            errMessage: 'Error from server...'
+        })        
+    }
+}
+
+
 module.exports = {
     getTopDoctorHome,
     getAllDoctor,
     detailInforDoctor,
-    getDetailInforDoctorById
+    getDetailInforDoctorById,
+    editMarkdown
 } 
-1

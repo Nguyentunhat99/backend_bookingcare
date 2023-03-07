@@ -20,9 +20,6 @@ let getTopDoctorHome = (limit) => {
                 ],
                 raw: true,
                 nest:true 
-                
-
-                // raw: true,
             })
             resolve({
                 errCode: 0,
@@ -58,7 +55,6 @@ let handlegetAllDoctor = () => {
                 errCode: 0,
                 data: doctors
             })
-
         } catch (error) {
             reject(error);
         }
@@ -97,27 +93,34 @@ let saveDetailInforDoctor = (inputData) => {
 let getDetailInforDoctorByIdService = (id) => {
     return new Promise(async(resolve, reject) => {
         try {
-            let dataDeataiInforDoctor = {};
-            let detailinfor = await db.User.findOne(
+            let data = await db.User.findOne(
                 {
                     where: {
                         id: id
                     },
                     attributes: {
-                        exclude: ['password','image'],
+                        exclude: ['password'],
                     },
                     include: [
-                        { model: db.Markdown , attributes: ['contentHTML', 'contentMarkdown','description']},//positionData ten moi quan he
+                        { model: db.Markdown , attributes: ['contentHTML', 'contentMarkdown','description']},
                         { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] },//positionData ten moi quan he
-                        { model: db.Allcode, as: 'genderData', attributes: ['valueEn', 'valueVi'] },
                     ],
                     raw: true,
                     nest:true 
                 }
             );
-            dataDeataiInforDoctor.errCode = 0;
-            dataDeataiInforDoctor.data = detailinfor;
-            resolve(dataDeataiInforDoctor);
+            //atributes la lay cac ban ghi 
+            //exclude la bỏ cac ban ghi 
+            //include la them moi quan he 
+            //raw: false sequelize object
+            //raw: true js object
+            if(data && data.image){
+                data.image = new Buffer(data.image, 'base64').toString('binary');
+            }
+            resolve({
+                errCode: 0,
+                data: data
+            });
         } catch (error) {
             reject(error)
         }
@@ -125,9 +128,50 @@ let getDetailInforDoctorByIdService = (id) => {
     )
 }
 
+
+let handleEditMarkdown = (data) => {
+    // console.log('data service',data);
+    return new Promise(async(resolve, reject) => {
+        try {
+            if(!data.doctorId){
+                resolve({
+                    errCode: 2,
+                    errMessage: 'Missing requierd parameters doctorId'
+                })
+            }
+            let Markdown = await db.Markdown.findOne({
+                where: {
+                    doctorId: data.doctorId,
+                },
+                raw: false,
+            })
+            // console.log('Markdown check 1999',Markdown)
+            //neu muon thuc hien ham save thi phai xet raw=false de chuyen ve sequelize object con 
+            //raw= true la objectbinh thuong
+            if (Markdown) {
+                Markdown.contentHTML = data.contentHTML;
+                Markdown.contentMarkdown = data.contentMarkdown;
+                Markdown.description = data.description;
+                await Markdown.save();
+                resolve({
+                    errCode: 0,
+                    errMessage: `update the user succeeds!`
+                })
+            } else {
+                resolve({
+                    errCode: 1,
+                    errMessage: `User's not found`
+                }); 
+            }
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
 module.exports = {
     getTopDoctorHome,
     handlegetAllDoctor,
     saveDetailInforDoctor,
-    getDetailInforDoctorByIdService
+    getDetailInforDoctorByIdService,
+    handleEditMarkdown
 }

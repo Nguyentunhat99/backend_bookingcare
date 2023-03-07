@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Markdown.belongsTo(models.User, { foreignKey: 'doctorId'})
+      //quan he 1-1
+      Markdown.belongsTo(models.User, { foreignKey: 'doctorId'})//1 markdown choi co 1 user
     }
   };
   Markdown.init({
