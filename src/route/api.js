@@ -15,6 +15,7 @@ const initAPIRoute = (app) => {
     router.post('/detail-infor-doctor',doctorController.detailInforDoctor);
     router.get('/get-detail-infor-doctor-by-id',doctorController.getDetailInforDoctorById);
     router.put('/edit-markdown',doctorController.editMarkdown);
+    router.post('/bulk-create-schedule',doctorController.bulkCreateSchedule);
     
     return app.use('/api/v1/', router)
 }

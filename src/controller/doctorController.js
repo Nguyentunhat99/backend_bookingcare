@@ -56,7 +56,7 @@ let getDetailInforDoctorById  = async (req, res) => {
             })
         }else{
             let dataInfor = await doctorService.getDetailInforDoctorByIdService(req.query.id);
-            console.log('dataInfor', dataInfor);
+            // console.log('dataInfor', dataInfor);
             return res.status(200).json(dataInfor);        
         }
     } catch (error) {
@@ -83,11 +83,27 @@ let editMarkdown  = async (req, res) => {
     }
 }
 
+let bulkCreateSchedule  = async (req, res) => {
+    try {
+        let data = req.body;
+        console.log('data controller',data);
+        let message = await doctorService.bulkCreateScheduleService(data);
+        return res.status(200).json(message);
+    } catch (error) {
+        console.log(error);
+        return res.status(200).json({ 
+            errCode: -1,
+            errMessage: 'Error from server...'
+        })        
+    }
+}
+
 
 module.exports = {
     getTopDoctorHome,
     getAllDoctor,
     detailInforDoctor,
     getDetailInforDoctorById,
-    editMarkdown
+    editMarkdown,
+    bulkCreateSchedule
 } 
